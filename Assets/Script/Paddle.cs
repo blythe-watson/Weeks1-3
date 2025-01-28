@@ -13,6 +13,10 @@ public class Paddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 rot = transform.eulerAngles;
+
+        //the plan was to use this to make the paddle follow the mouse
+
+        transform.eulerAngles = rot;
     }
 }
