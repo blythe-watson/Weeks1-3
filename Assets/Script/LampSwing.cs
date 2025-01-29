@@ -28,47 +28,47 @@ public class LampSwing : MonoBehaviour
     void Update()
     {
 
-    //this is a simple function that makes a circle (the axis point) spin
-        Vector3 rot = transform.eulerAngles;
-
-
-        //t represents where we are on the curve
-        //limit can be either negative one or positive one, meaning that t can go up or down the curve
-        //deltaTime is in there to smooth things out
-        t += direction * Time.deltaTime;
-
-        //Vector2 test = (-33, 33);
-
-        //every frame, a value is either added or subtracted from the z rotation of the axis point
-        //the value is based on the animation curve to give the illusion of a swinging motion, multiplied by the direction (-1 or 1)
         
-        rot.z += direction * swing.Evaluate(t);
+     
+       //first we make a vector that takes the current rotation angle of the axis point
+         Vector3 rot = transform.eulerAngles;
 
-        //some failed lines of code as I was trying to make this thing work >:[
-        //transform.eulerAngles = Vector2.Lerp(-33, 33, swing.Evaluate(t));
-        //rot.z += Mathf.Lerp((direction * swing.Evaluate(t)), -0.7f, 0.7f);
-        // rot.z += limit;
 
-        //if t reaches the upper end of its range, the direction flips
-        if (t >= 1)
-        {
-            t = 1;
-            direction *= -1;
-            //rot.z = 37;
-        }
+       //t represents where we are on the curve
+       //limit can be either negative one or positive one, meaning that t can go up or down the curve
+       //deltaTime is in there to smooth things out
+       t += direction * Time.deltaTime;
 
-        if(t <= 0)
-        {
-            t = 0;
-            direction *= -1;
-            //rot.z = -37;
-        }
+       
+       //every frame, a value is either added or subtracted from the z rotation of the axis point
+       //the value is based on the animation curve to give the illusion of a swinging motion, multiplied by the direction (-1 or 1)
 
-        /* if (t >= 1 || t <= 0)
-         {
-             limit = limit * -1;
-         }
- */
-        transform.eulerAngles = rot;
+       rot.z += direction * swing.Evaluate(t);
+
+                //some failed lines of code as I was trying to make this thing work >:[
+                //transform.eulerAngles = Vector2.Lerp(-33, 33, swing.Evaluate(t));
+                //rot.z += Mathf.Lerp((direction * swing.Evaluate(t)), -0.7f, 0.7f);
+                // rot.z += limit;
+
+       //if t reaches the upper end of its range (the end of the curve), the direction flips, which happens in the middle of the visual arc
+                if (t >= 1)
+                {
+                    t = 1;
+                    direction *= -1;
+                    //rot.z = 37;
+                }
+
+                if(t <= 0)
+                {
+                    t = 0;
+                    direction *= -1;
+                    //rot.z = -37;
+                }
+
+                //and then you update the angles at the end
+                transform.eulerAngles = rot;
+           
+
+
     }
 }

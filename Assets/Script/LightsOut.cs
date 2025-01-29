@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightsOut : MonoBehaviour
 {
-
+    //this tells us if the lamp is on or off
     public bool lampOn = true;
 
     // Start is called before the first frame update
@@ -20,13 +20,13 @@ public class LightsOut : MonoBehaviour
         //vector for the position of the shadow, which is relative to its parent
         Vector3 pos = transform.localPosition;
 
-        //if the space key is pressed, it switches the light's variable, making it switch between two positions
+        //if the space key is pressed, it switches the light's variable, making it alter between two positions (as booleans do)
         if (Input.GetKeyDown(KeyCode.Space))
         {
             lampOn = !lampOn;
         }
 
-        //if the light is on, it stays at 0, which is relative to the lamp's swinging
+        //if the light is on, its position stays at 0, which will be local to the lamp's swinging
         if(lampOn == true)
         {
             
@@ -40,7 +40,7 @@ public class LightsOut : MonoBehaviour
             pos.x = 30;
         }
 
-        //then the position updates with the new spot
+        //then the LOCAL position updates with the new spot
         transform.localPosition = pos;
     }
 }
